@@ -1,67 +1,163 @@
-# Backend Locação – API de Clientes
+# Backend de Sistema de Locação
 
-API REST desenvolvida em Java com Spring Boot para gerenciamento de clientes, permitindo operações de criação, consulta, atualização e exclusão (CRUD).
-
-Projeto desenvolvido como teste técnico e material de estudo, seguindo boas práticas de organização, separação de camadas e arquitetura backend.
+API REST desenvolvida como teste técnico para um sistema de locação, contendo regras de negócio, autenticação JWT e controle de reservas com validação de conflitos de datas.
 
 ---
 
-## 🛠️ Tecnologias Utilizadas
+## 🛠️ Tecnologias utilizadas
 
-- Java 17
-- Spring Boot
-- Spring Web
-- Spring Data JPA
-- Hibernate
-- Jakarta Bean Validation
-- Flyway
-- PostgreSQL
-- Swagger OpenAPI
-- Maven
-- Postman
+* Java 17
+* Spring Boot
+* Spring Data JPA
+* Spring Security (JWT)
+* Hibernate
+* PostgreSQL
+* Flyway (migrations)
+* Maven
+* Postman (testes)
 
 ---
 
-## 🚀 Como Executar o Projeto
+## 📌 Funcionalidades
+
+### Clientes
+
+* Criar cliente
+* Listar clientes
+* Buscar cliente por ID
+* Atualizar cliente
+* Excluir cliente (**bloqueado se houver reservas vinculadas**)
+
+### Tipos de Locação
+
+* Criar tipo de locação
+* Listar tipos de locação
+* Buscar por ID
+* Atualizar tipo de locação
+* Desativar tipo de locação (**bloqueado se houver reservas vinculadas**)
+
+### Reservas
+
+* Criar reserva
+* Listar reservas
+* Buscar reserva por ID
+* Atualizar reserva
+* Excluir reserva
+* **Validação de conflito de datas (não permite reservas sobrepostas)**
+
+### Disponibilidade
+
+* Endpoint para verificar disponibilidade de um tipo de locação em um período de datas
+
+---
+
+## 🔐 Segurança
+
+* Autenticação baseada em JWT
+* Endpoints protegidos exigem token válido
+* Endpoint público para login
+* Swagger liberado apenas para documentação
+
+---
+
+## 🔑 Login (JWT)
+
+### Endpoint
+
+```
+POST /auth/login
+```
+
+### Exemplo de body
+
+```json
+{
+  "email": "admin@teste.com",
+  "senha": "123456"
+}
+```
+
+### Resposta
+
+```json
+{
+  "token": "jwt-token-aqui"
+}
+```
+
+Utilize o token retornado no header das requisições protegidas:
+
+```
+Authorization: Bearer SEU_TOKEN
+```
+
+---
+
+## 📄 Documentação da API
+A documentação da API está disponível via Swagger:
+
+http://localhost:8080/swagger-ui/index.html
+
+---
+
+## 📦 Regras de negócio implementadas
+
+* ❌ Não permite criar reservas para datas já reservadas (mesmo tipo de locação)
+* ❌ Não permite excluir clientes com reservas vinculadas
+* ❌ Não permite excluir tipos de locação com reservas vinculadas
+* ✔ Validação de campos obrigatórios
+* ✔ Datas de reserva validadas (data final não pode ser anterior à inicial)
+
+---
+
+## ▶️ Como executar o projeto
 
 ### Pré-requisitos
 
-Para executar o projeto, é necessário ter instalado:
+* Java 17+
+* PostgreSQL
+* Maven
 
-- Java 17 ou superior
-- Maven
-- PostgreSQL
-- IntelliJ IDEA (opcional)
+### Passos
 
----
+1. Clone o repositório
+2. Configure o banco no `application.yml`
+3. Crie o banco de dados no PostgreSQL
+4. Execute o projeto:
 
-### Executando o projeto
-
-#### Opção 1 – Via Maven (recomendado)
-
-1. Abra o terminal na pasta do projeto (onde está o arquivo `pom.xml`)
-2. Execute o comando:
-
-```bash
+```
 mvn spring-boot:run
 ```
 
-3. Aguarde a aplicação iniciar
-
-A aplicação estará disponível em:
-
-http://localhost:8080
-
-4. A documentação da API (Swagger) pode ser acessada em:
-
-http://localhost:8080/swagger-ui.html
+As migrations serão executadas automaticamente via Flyway.
 
 ---
 
-## 🔗 Endpoints Principais
+## 🧪 Testes
 
-- GET /clientes — Lista todos os clientes
-- GET /clientes/{id} — Busca cliente por ID
-- POST /clientes — Cadastra um novo cliente
-- PUT /clientes/{id} — Atualiza um cliente
-- DELETE /clientes/{id} — Remove um cliente
+Os endpoints foram testados utilizando o Postman.
+
+Fluxo sugerido:
+
+1. Criar usuário no banco (para login)
+2. Realizar login e obter token
+3. Criar cliente
+4. Criar tipo de locação
+5. Criar reserva
+6. Testar conflito de datas
+7. Testar bloqueio de exclusões
+
+---
+
+## 📄 Observações finais
+
+Projeto desenvolvido com foco em boas práticas:
+
+* Separação de camadas (Controller, Service, Repository)
+* Regras de negócio centralizadas no Service
+* Uso de DTOs e Mappers
+* Código limpo e organizado
+
+---
+
+👤 **Autor**: José Neto

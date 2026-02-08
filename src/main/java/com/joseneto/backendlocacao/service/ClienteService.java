@@ -4,6 +4,7 @@ import com.joseneto.backendlocacao.dto.ClienteDTO;
 import com.joseneto.backendlocacao.entity.Cliente;
 import com.joseneto.backendlocacao.mapper.ClienteMapper;
 import com.joseneto.backendlocacao.repository.ClienteRepository;
+import com.joseneto.backendlocacao.repository.ReservaRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,9 +15,11 @@ import java.util.stream.Collectors;
 public class ClienteService {
 
     private final ClienteRepository clienteRepository;
+    private final ReservaRepository reservaRepository;
 
-    public ClienteService(ClienteRepository clienteRepository) {
+    public ClienteService(ClienteRepository clienteRepository, ReservaRepository reservaRepository) {
         this.clienteRepository = clienteRepository;
+        this.reservaRepository = reservaRepository;
     }
 
     public ClienteDTO salvar(ClienteDTO dto) {
@@ -39,6 +42,15 @@ public class ClienteService {
     }
 
     public void deletar(Long id) {
+
+        if (!clienteRepository.existsById(id)) {
+            throw new RuntimeException("Cliente não encontrado");
+        }
+
+        if (reservaRepository.existsByClienteId(id)) {
+            throw new RuntimeException("Não é possível excluir cliente com reservas vinculadas");
+        }
+
         clienteRepository.deleteById(id);
     }
 

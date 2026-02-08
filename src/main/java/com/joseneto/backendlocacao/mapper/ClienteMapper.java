@@ -2,7 +2,9 @@ package com.joseneto.backendlocacao.mapper;
 
 import com.joseneto.backendlocacao.dto.ClienteDTO;
 import com.joseneto.backendlocacao.entity.Cliente;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ClienteMapper {
 
     public static Cliente toEntity(ClienteDTO dto) {

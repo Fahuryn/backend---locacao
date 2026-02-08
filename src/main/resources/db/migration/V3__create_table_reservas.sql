@@ -9,7 +9,7 @@ CREATE TABLE reservas (
 
     CONSTRAINT fk_reserva_cliente
         FOREIGN KEY (cliente_id)
-            REFERENCES clientes (id),
+            REFERENCES cliente (id),
 
     CONSTRAINT fk_reserva_tipo_locacao
         FOREIGN KEY (tipo_locacao_id)

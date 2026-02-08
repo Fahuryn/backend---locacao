@@ -1,0 +1,2 @@
+ALTER TABLE tipos_locacao
+    ADD COLUMN ativo BOOLEAN NOT NULL DEFAULT true;
