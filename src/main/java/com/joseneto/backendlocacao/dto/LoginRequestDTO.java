@@ -11,6 +11,13 @@ public class LoginRequestDTO {
     @NotBlank
     private String senha;
 
+    public LoginRequestDTO(String mail, String number) {
+    }
+
+    public LoginRequestDTO() {
+
+    }
+
     public String getEmail() {
         return email;
     }

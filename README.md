@@ -149,6 +149,13 @@ Fluxo sugerido:
 
 ---
 
+## 🧪 Testes Unitários
+O projeto conta com uma suíte de testes unitários utilizando **JUnit 5** e **Mockito**, focando em:
+* **Autenticação**: Validação de login e geração de tokens JWT.
+* **Regras de Negócio**: Garantia de integridade nas reservas, impedindo conflitos de datas.
+
+---
+
 ## 📄 Observações finais
 
 Projeto desenvolvido com foco em boas práticas:
