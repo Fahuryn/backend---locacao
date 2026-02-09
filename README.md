@@ -14,6 +14,8 @@ API REST desenvolvida como teste técnico para um sistema de locação, contendo
 * PostgreSQL
 * Flyway (migrations)
 * Maven
+* Docker & Docker Compose
+* JUnit + Mockito
 * Postman (testes)
 
 ---
@@ -51,31 +53,26 @@ API REST desenvolvida como teste técnico para um sistema de locação, contendo
 
 ---
 
-## 🔐 Segurança
+### 🔐 Segurança e Autenticação
 
-* Autenticação baseada em JWT
-* Endpoints protegidos exigem token válido
-* Endpoint público para login
-* Swagger liberado apenas para documentação
+A API utiliza **JWT (JSON Web Token)**. Os endpoints protegidos exigem o header `Authorization: Bearer <TOKEN>`.
 
----
+### Credenciais de Acesso (Padrão de Teste):
+As credenciais abaixo são inseridas automaticamente via Flyway (V7):
+* **E-mail:** `admin@email.com`
+* **Senha:** `123`
 
-## 🔑 Login (JWT)
+### Endpoint de Login
+`POST /auth/login`
 
-### Endpoint
-
-```
-POST /auth/login
-```
-
-### Exemplo de body
-
+**Exemplo de Body:**
 ```json
 {
-  "email": "admin@teste.com",
-  "senha": "123456"
+  "email": "admin@email.com",
+  "senha": "123"
 }
 ```
+---
 
 ### Resposta
 
@@ -110,42 +107,31 @@ http://localhost:8080/swagger-ui/index.html
 
 ---
 
-## ▶️ Como executar o projeto
+## ▶️ Como executar o projeto (Via Docker)
 
-### Pré-requisitos
+O projeto está configurado para subir todo o ambiente (Banco de Dados + Aplicação) via Docker Compose.
 
-* Java 17+
-* PostgreSQL
-* Maven
-
-### Passos
-
-1. Clone o repositório
-2. Configure o banco no `application.yml`
-3. Crie o banco de dados no PostgreSQL
-4. Execute o projeto:
-
-```
-mvn spring-boot:run
-```
-
-As migrations serão executadas automaticamente via Flyway.
-
+1. **Gerar o arquivo .jar:**
+   ```bash
+   mvn clean package -DskipTests
+   ```
+2. **Subir os containers:**
+   ```bash
+   mvn clean package -DskipTests
+   ```
+   
 ---
 
-## 🧪 Testes
+## 🧪 Testes e Coleção Postman
 
-Os endpoints foram testados utilizando o Postman.
+Para facilitar a avaliação, incluí uma coleção do Postman pronta para uso.
 
-Fluxo sugerido:
-
-1. Criar usuário no banco (para login)
-2. Realizar login e obter token
-3. Criar cliente
-4. Criar tipo de locação
-5. Criar reserva
-6. Testar conflito de datas
-7. Testar bloqueio de exclusões
+1. **Arquivo:** Localizado em `/postman/backend_locacao.postman_collection.json`.
+2. **Importação:** No Postman, clique em **Import** e selecione o arquivo.
+3. **Fluxo sugerido:**
+    * Execute o request **Login** para obter o token.
+    * Copie o token e configure o **Bearer Token** na aba Authorization dos demais requests.
+    * Crie um **Cliente** e um **Tipo de Locação** antes de realizar a **Reserva**.
 
 ---
 

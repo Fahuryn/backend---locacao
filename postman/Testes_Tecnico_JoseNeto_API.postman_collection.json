@@ -1,0 +1,272 @@
+{
+  "info": {
+    "_postman_id": "f7b0b03d-9c0f-4b7d-b8d2-5268a3637ae7",
+    "name": "backend-locacao-JoseNeto",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "52112890",
+    "_collection_link": "https://go.postman.co/collection/52112890-f7b0b03d-9c0f-4b7d-b8d2-5268a3637ae7?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Auth - Login Admin",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"email\": \"admin@email.com\",\r\n    \"senha\": \"123\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/auth/login",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "auth",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Cadastrar Clientes",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBlbWFpbC5jb20iLCJpYXQiOjE3NzA2NTQ0NTEsImV4cCI6MTc3MDc0MDg1MX0.O5WyuZFby7x9XYg5vQKszNk1ycR_2DP5nXIEYBwZRXs",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"nome\": \"joseneto\",\r\n    \"email\": \"joseneto@email.com\",\r\n    \"telefone\": \"62995292323\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/clientes",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "clientes"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Listar Clientes",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBlbWFpbC5jb20iLCJpYXQiOjE3NzA2NTQ0NTEsImV4cCI6MTc3MDc0MDg1MX0.O5WyuZFby7x9XYg5vQKszNk1ycR_2DP5nXIEYBwZRXs",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"email\": \"admin@email.com\",\r\n    \"senha\": \"123\"\r\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/clientes",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "clientes"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Criar Tipos de Locação",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBlbWFpbC5jb20iLCJpYXQiOjE3NzA2NTQ0NTEsImV4cCI6MTc3MDc0MDg1MX0.O5WyuZFby7x9XYg5vQKszNk1ycR_2DP5nXIEYBwZRXs",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"nome\": \"Valor do aluguel\",\r\n  \"valorDiaria\": 170.0,\r\n  \"descricao\": \"Locação moto\",\r\n  \"ativo\": true\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/tipos-locacao",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "tipos-locacao"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Criar Reservas",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBlbWFpbC5jb20iLCJpYXQiOjE3NzA2NTQ0NTEsImV4cCI6MTc3MDc0MDg1MX0.O5WyuZFby7x9XYg5vQKszNk1ycR_2DP5nXIEYBwZRXs",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"clienteId\": 1,\r\n  \"tipoLocacaoId\": 2,\r\n  \"dataInicio\": \"2026-02-10\",\r\n  \"dataFim\": \"2026-02-15\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/reservas",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "reservas"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Listar Tipo de Locação",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBlbWFpbC5jb20iLCJpYXQiOjE3NzA2NTQ0NTEsImV4cCI6MTc3MDc0MDg1MX0.O5WyuZFby7x9XYg5vQKszNk1ycR_2DP5nXIEYBwZRXs",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"nome\": \"Casa\",\r\n  \"descricao\": \"Loteamento Vera Cruz\",\r\n  \"ativo\": true,\r\n  \"valorDiaria\": 120.00\r\n}\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/tipos-locacao",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "tipos-locacao"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Listar Reservas",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBlbWFpbC5jb20iLCJpYXQiOjE3NzA2NTQ0NTEsImV4cCI6MTc3MDc0MDg1MX0.O5WyuZFby7x9XYg5vQKszNk1ycR_2DP5nXIEYBwZRXs",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"clienteId\": 4,\r\n  \"tipoLocacaoId\": 5,\r\n  \"dataInicio\": \"2026-03-14\",\r\n  \"dataFim\": \"2026-03-17\"\r\n}\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/reservas",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "reservas"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
